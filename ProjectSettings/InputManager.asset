@@ -88,8 +88,8 @@ InputManager:
   - serializedVersion: 3
     m_Name: Jump
     descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
+    descriptiveNegativeName: Crouch
+    negativeButton: left shift
     positiveButton: space
     altNegativeButton: 
     altPositiveButton: 
