@@ -1,3 +1,13 @@
+/*
+ * PlayerTracker
+ * 
+ * Controls player camera rotation with the mouse.
+ *
+ * Luis Fernando Lomelin Ibarra
+ * Jair Antonio Bautista Loranca
+ * David Alejandro Martínez Tristán
+ *
+*/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,7 +30,7 @@ public class PlayerTracker : MonoBehaviour
     float rotateVertical;
 
     private float xRotationCamera = 0f;
-    // Start is called before the first frame update
+
     void Start()
     {
         ahead = new GameObject("ahead");
@@ -29,35 +39,18 @@ public class PlayerTracker : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    void FixedUpdate()
-    {
-        
-        //transform.RotateAround(trackedObject.transform.position, -Vector3.up, rotateHorizontal * sensitivity); 
-        //transform.RotateAround(Vector3.zero, transform.right, rotateVertical * sensitivity); 
-    }
+    void FixedUpdate() {}
 
     void Update() {
+        // Get mouse values
         rotateHorizontal = Input.GetAxis("Mouse X") *sensitivity * Time.deltaTime;
         rotateVertical = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
-        //print(rotateHorizontal);
+        
+        // Get mouse values
         xRotationCamera -= rotateVertical;
         xRotationCamera = Mathf.Clamp(xRotationCamera, -90f, 90f);
         transform.localRotation = Quaternion.Euler(xRotationCamera, 0f, 0f);
         trackedObject.Rotate(Vector3.up * rotateHorizontal);
         _renderer.enabled = (currentDistance > hideDistance);
-        //transform.position = trackedObject.transform.position;
-
-
     }
-
-    // Update is called once per frame
-    /*void Update()
-    {
-        ahead.transform.position = trackedObject.position + trackedObject.forward * (maxDistance * 0.25f);
-        currentDistance += Input.GetAxisRaw(moveAxis) * moveSpeed * Time.deltaTime;
-        currentDistance = Mathf.Clamp(currentDistance,0,maxDistance);
-        //transform.position = Vector3.MoveTowards(transform.position, trackedObject.position + Vector3.up * currentDistance - trackedObject.forward * (currentDistance +maxDistance*0.5f),updateSpeed*Time.deltaTime);
-        //transform.LookAt(ahead.transform);
-        _renderer.enabled = (currentDistance > hideDistance);
-    }*/
 }
